@@ -19,14 +19,16 @@
       }
       
       .messages li {
-          background: #e0f7fa; /* 吹き出しの背景色 */
-          padding: 10px 15px;
-          margin-bottom: 10px;
-          border-radius: 15px;
-          max-width: 60%;
-          word-wrap: break-word;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        display: inline-block; /* インライン要素のように振る舞う */
+        background: #e0f7fa;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        border-radius: 15px;
+        max-width: 80%; /* 長すぎる場合の制限 */
+        word-wrap: break-word;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 
       .form {
         display: flex;
