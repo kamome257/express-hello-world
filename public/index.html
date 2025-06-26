@@ -19,27 +19,14 @@
       }
       
       .messages li {
-  display: inline-block;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 15px;
-  max-width: 80%;
-  word-wrap: break-word;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* 送信メッセージ（右寄せ） */
-.sent {
-  background: #c8e6c9;
-  align-self: flex-end;
-  text-align: right;
-}
-
-/* 受信メッセージ（左寄せ） */
-.received {
-  background: #e0f7fa;
-  align-self: flex-start;
-  text-align: left;
+        display: inline-block; /* インライン要素のように振る舞う */
+        background: #e0f7fa;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        border-radius: 15px;
+        max-width: 80%; /* 長すぎる場合の制限 */
+        word-wrap: break-word;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 
@@ -84,32 +71,18 @@
           input.focus()
         }
 
-       ws.onmessage = function (msg) {
-  const response = msg.data
-  const messageList = document.querySelector('.messages')
-  const li = document.createElement('li')
-  li.textContent = response
-  li.classList.add('received') // 受信メッセージ
-  messageList.appendChild(li)
-}
+        ws.onmessage = function (msg) {
+          const response = msg.data
+          const messageList = document.querySelector('.messages')
+          const li = document.createElement('li')
+          li.textContent = response
+          messageList.appendChild(li)
+        }
 
-form.onsubmit = function (e) {
-  e.preventDefault()
-  const input = document.querySelector('.input')
-  const text = input.value
-
-  // 表示用に送信メッセージも追加
-  const messageList = document.querySelector('.messages')
-  const li = document.createElement('li')
-  li.textContent = text
-  li.classList.add('sent')
-  messageList.appendChild(li)
-
-  ws.send(text)
-  input.value = ''
-  input.focus()
-}
-
+        ws.onerror = function (error) {
+          console.error('WebSocket Error: ', error)
+        }
+      }
 
       main()
     </script>
